@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { ImSearch } from 'react-icons/im';
 import s from './SearchBar.module.css';
 
-const SearchBar = ({ setQuery, notify }) => {
-  // Додано notify як пропс
-  const [inputValue, setInputValue] = useState('');
+interface SearchBarProps {
+  setQuery: (query: string) => void; // Функція, що приймає рядок
+  notify: () => void; // Функція без параметрів
+}
 
-  const handleChange = e => {
+const SearchBar: React.FC<SearchBarProps> = ({ setQuery, notify }) => {
+  const [inputValue, setInputValue] = useState<string>(''); // Визначаємо тип для стану
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!inputValue.trim()) {

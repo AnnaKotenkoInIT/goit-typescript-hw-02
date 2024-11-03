@@ -1,6 +1,10 @@
 import s from './LoadMoreBtn.module.css';
 
-const LoadMoreBtn = ({ setPage }) => {
+interface LoadMoreBtnProps {
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({ setPage }) => {
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
   };

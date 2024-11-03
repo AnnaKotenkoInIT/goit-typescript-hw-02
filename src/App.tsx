@@ -7,17 +7,18 @@ import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import ImageModal from './components/ImageModal/ImageModal';
+import { Image } from './types';
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalImages, setTotalImages] = useState(0);
-  const [hasSearched, setHasSearched] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+const App: React.FC = () => {
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [totalImages, setTotalImages] = useState<number>(0);
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -33,7 +34,7 @@ const App = () => {
     }
   }, [modalIsOpen]);
 
-  const fetchImagesData = async (query, page) => {
+  const fetchImagesData = async (query: string, page: number) => {
     setIsLoading(true);
     setIsError(false);
 
@@ -52,7 +53,7 @@ const App = () => {
 
   const notify = () => toast.error('Please, type what you want to find!');
 
-  const handleSetQuery = searchValue => {
+  const handleSetQuery = (searchValue: string) => {
     setQuery(searchValue);
     resetState();
   };
@@ -62,7 +63,7 @@ const App = () => {
     setPage(1);
   };
 
-  const openModal = image => {
+  const openModal = (image: Image) => {
     setSelectedImage(image);
     setIsOpen(true);
   };
@@ -86,7 +87,7 @@ const App = () => {
       {images.length !== 0 && <LoadMoreBtn setPage={setPage} />}
       <ImageModal
         isOpen={modalIsOpen}
-        closeModal={closeModal}
+        onClose={closeModal}
         image={selectedImage}
       />
       <Toaster position="top-right" />

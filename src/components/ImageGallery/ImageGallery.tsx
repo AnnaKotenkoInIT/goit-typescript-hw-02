@@ -1,11 +1,21 @@
+import React from 'react';
 import ImageCard from '../ImageCard/ImageCard';
+import { Image, OnImageClick } from '../../types';
 import s from './ImageGallery.module.css';
 
-const ImageGallery = ({ images, totalImages, hasSearched, openModal }) => {
-  const handleImageClick = image => {
-    openModal(image);
-  };
+interface ImageGalleryProps {
+  images: Image[];
+  totalImages: number;
+  hasSearched: boolean;
+  openModal: OnImageClick;
+}
 
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+  images,
+  totalImages,
+  hasSearched,
+  openModal,
+}) => {
   return (
     <>
       {totalImages === 0 && hasSearched && (
@@ -16,7 +26,7 @@ const ImageGallery = ({ images, totalImages, hasSearched, openModal }) => {
       <ul className={s.list}>
         {images.map(image => (
           <li key={image.id} className={s.item}>
-            <ImageCard image={image} onClick={() => handleImageClick(image)} />
+            <ImageCard image={image} onClick={() => openModal(image)} />
           </li>
         ))}
       </ul>

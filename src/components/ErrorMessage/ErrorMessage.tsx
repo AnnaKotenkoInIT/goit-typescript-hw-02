@@ -1,6 +1,6 @@
 import s from './ErrorMessage.module.css';
 
-const ErrorMessage = () => {
+const ErrorMessage: React.FC = (): JSX.Element => {
   return <p className={s.errorText}>Please, type what you want to find!</p>;
 };
 
