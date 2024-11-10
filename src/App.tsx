@@ -26,14 +26,6 @@ const App: React.FC = () => {
     fetchImagesData(query, page);
   }, [query, page]);
 
-  useEffect(() => {
-    if (modalIsOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [modalIsOpen]);
-
   const fetchImagesData = async (query: string, page: number) => {
     setIsLoading(true);
     setIsError(false);
